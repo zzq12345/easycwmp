@@ -1,0 +1,33 @@
+在OpenWRT中安裝
+安裝EasyCwmp，需要以下幾個依賴：
+
+libuci
+libcurl
+json-c
+libubox
+libubus
+microxml
+如果已經成功安裝了OpenWRT，那麼除了microxml，其他依賴應該都會在feeds階段被安裝。microxml安裝方法如下：
+
+從github上clone源代碼：
+
+git clone https://github.com/pivasoftware/microxml.git
+生成makefile
+
+guoliang@guoliang-VirtualBox:~/Downloads/microxml$ aclocal
+aclocal: warning: autoconf input should be named 'configure.ac', not 'configure.in'
+guoliang@guoliang-VirtualBox:~/Downloads/microxml$ autoconfig
+autoconfig: command not found
+guoliang@guoliang-VirtualBox:~/Downloads/microxml$ autoconf
+guoliang@guoliang-VirtualBox:~/Downloads/microxml$ automake --add-missing
+automake: warning: autoconf input should be named 'configure.ac', not 'configure.in'
+configure.in: error: no proper invocation of AM_INIT_AUTOMAKE was found.
+configure.in: You should verify that configure.in invokes AM_INIT_AUTOMAKE,
+configure.in: that aclocal.m4 is present in the top-level directory,
+configure.in: and that aclocal.m4 was recently regenerated (using aclocal)
+automake: error: no 'Makefile.am' found for any configure output
+編譯安裝
+
+使用EasyCWMP1.8.0版本，必須加上PKG_HASH=skip，否則無法編譯通過，參考：http://support.easycwmp.org/view.php?id=345
+
+make V=s PKG_HASH=skip
